@@ -16,7 +16,7 @@ public class ServerChatAppController implements Initializable {
 
 	DatagramSocket serverSocket;
 	DatagramPacket receivePacket;
-	
+
 	@FXML
 	private Button startServer;
 	@FXML
@@ -29,32 +29,67 @@ public class ServerChatAppController implements Initializable {
 	@FXML
 	public void startUDPServer(ActionEvent event) throws IOException {
 		System.out.println("Starting server");
-		
+		statusLabel.setText("server is running");
 
-		serverSocket = new DatagramSocket(9877);
-		byte[] receiveData = new byte[1024];
-		byte[] sendData = new byte[1024];
-		statusLabel.setText("Server is running");
-		
-		receivePacket = new DatagramPacket(receiveData, receiveData.length);
-		
-		serverSocket.receive(receivePacket);
-		String sentence = new String(receivePacket.getData());
-		InetAddress IPAddress = receivePacket.getAddress();
+		Server server = new Server();
+		Thread thread = new Thread(server);
 
-		int port = receivePacket.getPort();
-		String capitalizedSentence = sentence.toUpperCase();
-		sendData = capitalizedSentence.getBytes();
+		thread.start();
 
-		DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
-
-		serverSocket.send(sendPacket);
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 
+	}
+}
+
+class Server implements Runnable {
+	Socket sessionSocket;
+	ServerSocket serverSocket;
+
+	public Server() {
+
+	}
+
+	public void startServer() throws IOException {
+		DatagramSocket udpSocket = new DatagramSocket(9876);
+
+		byte[] receiveData = new byte[1024];
+		byte[] sendData = new byte[1024];
+
+		while (true) {
+
+			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+			udpSocket.receive(receivePacket);
+			
+			String sentence = new String(receivePacket.getData());
+			
+			InetAddress IPAddress = receivePacket.getAddress();
+
+			int port = receivePacket.getPort();
+
+			String capitalizedSentence = sentence.toUpperCase();
+
+			sendData = capitalizedSentence.getBytes();
+
+			DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+
+			udpSocket.send(sendPacket);
+		}
+		//udpSocket.close();
+	}
+
+	@Override
+	public void run() {
+		//
+		try {
+			startServer();
+		}
+		catch (IOException e) {
+			System.out.println("Error with starting server: "+e.getMessage());
+		}
 	}
 
 }
