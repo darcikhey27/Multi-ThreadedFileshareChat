@@ -10,24 +10,30 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class ClientChatAppController implements Initializable {
 
 	@FXML
-	private TextField messages;
+	private TextArea messages;
+	@FXML
+	private TextField input;
 	@FXML
 	private Button send;
 	@FXML
-	private Button exit;
+	private Button start;
 
-	public void startClient() throws Exception {
-		
+	@FXML
+	public void startClient(ActionEvent event) throws Exception {
 		System.out.println("Enter sentence");
 		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+		
+		String line = input.getText();
 
 		DatagramSocket clientSocket = new DatagramSocket();
 

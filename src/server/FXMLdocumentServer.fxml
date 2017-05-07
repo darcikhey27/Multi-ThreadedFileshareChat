@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.ServerChatAppController">
@@ -28,9 +30,12 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button fx:id="startServer" layoutX="103.0" layoutY="335.0" mnemonicParsing="false" onAction="#startUDPServer" prefHeight="25.0" prefWidth="107.0" text="Start server" />
-      <Label layoutX="164.0" layoutY="52.0" prefHeight="17.0" prefWidth="125.0" text="Server" />
-      <Button fx:id="stopServer" layoutX="226.0" layoutY="335.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Stop server" />
-      <Label fx:id="statusLabel" layoutX="103.0" layoutY="285.0" prefHeight="17.0" prefWidth="242.0" text="Label" />
+      <Button fx:id="startServer" layoutX="144.0" layoutY="333.0" mnemonicParsing="false" onAction="#startUDPServer" prefHeight="25.0" prefWidth="107.0" text="Start server" />
+      <Label layoutX="248.0" layoutY="43.0" prefHeight="17.0" prefWidth="125.0" text="Server" />
+      <Button fx:id="stopServer" layoutX="402.0" layoutY="243.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Send" />
+      <Label fx:id="statusLabel" layoutX="145.0" layoutY="285.0" prefHeight="17.0" prefWidth="242.0" text="status: " />
+      <Label layoutX="204.0" layoutY="285.0" prefHeight="17.0" prefWidth="125.0" text="." />
+      <TextArea fx:id="messages" layoutX="144.0" layoutY="104.0" prefHeight="139.0" prefWidth="331.0" />
+      <TextField fx:id="inputMsg" layoutX="144.0" layoutY="243.0" prefHeight="25.0" prefWidth="258.0" />
    </children>
 </AnchorPane>

@@ -10,21 +10,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.text.Text;
+import javafx.scene.control.TextField;
+
 
 public class ServerChatAppController implements Initializable {
 
 	DatagramSocket serverSocket;
 	DatagramPacket receivePacket;
 
-	@FXML
-	private Button startServer;
-	@FXML
-	private Button stopServer;
-	@FXML
-	private TextArea textArea;
-	@FXML
-	private Label statusLabel;
+	@FXML private TextArea messages;
+	@FXML private Button startServer;
+	@FXML private Button stopServer;
+	@FXML private Label statusLabel;
+	@FXML private TextField  inputMsg;
 
 	@FXML
 	public void startUDPServer(ActionEvent event) throws IOException {
